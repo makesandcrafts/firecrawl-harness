@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.cache/
+.npm-cache/
+.venv/
+.env
+.publish-secret/

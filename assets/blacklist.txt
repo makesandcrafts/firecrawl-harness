@@ -1,0 +1,17 @@
+# Domain blacklist for fc_research.py result filtering (suffix match).
+# One domain per line; lines starting with # are comments. Extend freely —
+# entries here remove low-information social/ads noise from research digests.
+# Not blocked on purpose (forums/reference can be valuable): reddit.com,
+# stackoverflow.com, news sites.
+facebook.com
+instagram.com
+twitter.com
+x.com
+tiktok.com
+pinterest.com
+linkedin.com
+youtube.com
+doubleclick.net
+googlesyndication.com
+taboola.com
+outbrain.com
