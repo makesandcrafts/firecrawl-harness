@@ -70,10 +70,13 @@ Exit codes: `2` SearXNG down, `3` Firecrawl down, `4` timeout, `5` job/validatio
    stdio: `npx -y firecrawl-mcp@3.24.0` with `FIRECRAWL_API_URL` set; tools
    appear as `mcp__firecrawl__firecrawl_<tool>` (the npm server's raw tool
    names are already `firecrawl_*`, so the bridge's namespacing doubles the
-   prefix — verified live: 27 tools incl. `firecrawl_scrape|map|crawl|
-   check_crawl_status`; `firecrawl_search` needs Google keys and the
-   cloud-only `monitor_*`/`research_*`/`agent`/`interact`/`parse`/
-   `developer_search`/`extract` tools error against this stack).
+   prefix — verified live: 27 tools registered, but the callable set in
+   practice is `mcp__firecrawl__firecrawl_scrape|map|crawl|check_crawl_status`;
+   bare names like `firecrawl_search` are not registered in any session
+   (`unknown tool`), and the tools behind `firecrawl_search` (needs Google
+   keys) plus the cloud-only `monitor_*`/`research_*`/`agent`/`interact`/
+   `parse`/`developer_search`/`extract` error against this stack by design —
+   search goes through `scripts/fc_research.py`/SearXNG, never those tools).
    `failOnStartupError: false` keeps DSH bootable if npx/registry is
    unavailable. Remove that single hunk to roll back — the profile's
    `patchReload: live` hot-applies patch edits, so the original (broken)

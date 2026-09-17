@@ -54,14 +54,16 @@ under heavy crawls has been observed in production.
 - `FIRECRAWL_API_URL` defaults to `http://127.0.0.1:3002`; a non-loopback
   value additionally needs `FC_ALLOW_REMOTE_API=1`.
 - Exit codes: 2 SearXNG down · 3 Firecrawl down · 4 timeout · 5 job failed.
-- MCP tools registered via `@deepseek-ai/dsh-mcp-client` with
-  `npx -y firecrawl-mcp@3.24.0` appear (verified handshake) as
+- MCP tools (optional surface) — the callable names are **only** these four,
+  each prefixed `mcp__firecrawl__`; always use the full registered name:
   `mcp__firecrawl__firecrawl_scrape`, `mcp__firecrawl__firecrawl_map`,
-  `mcp__firecrawl__firecrawl_crawl` (+ `firecrawl_check_crawl_status`) —
-  note the doubled prefix, the npm server already names tools `firecrawl_*`.
-  `firecrawl_search` targets `/v1/search` (needs Google keys) and
-  cloud-only tools (`firecrawl_monitor_*`, `firecrawl_research_*`, `agent`,
-  `interact`, `parse`, `developer_search`, `extract`) will error locally —
-  for search use `fc_research.py`. If the 27-tool schema overhead costs too
-  many tokens per request, remove the `mcp-firecrawl` hunk from your DSH
-  profile's `cordis.patch.yml` (skill scripts work without it).
+  `mcp__firecrawl__firecrawl_crawl`, `mcp__firecrawl__firecrawl_check_crawl_status`.
+  Bare names (`firecrawl_search`, `firecrawl_scrape`, …) are **not tools in any
+  session** — calling one fails `unknown tool`; the prefix doubles because the
+  npm server already names its tools `firecrawl_*`. **Never call** the rest of
+  the registered set: `firecrawl_search` needs Google/Serper keys a self-hosted
+  API lacks, and the cloud-only tools (`firecrawl_monitor_*`, `firecrawl_research_*`,
+  `agent`, `interact`, `parse`, `developer_search`, `extract`) cannot work
+  locally. **Search is always `scripts/fc_research.py` here.**
+  Note: a session snapshots its tool list at start — sessions opened before the
+  MCP row went live simply have no MCP tools; the scripts need none.
