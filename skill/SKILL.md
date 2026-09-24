@@ -9,8 +9,8 @@ Self-hosted Firecrawl (loopback API) fused with **your** self-hosted SearXNG
 instance. Python-stdlib-only scripts — nothing to install. If anything
 misbehaves, run the healthcheck first.
 
-Scripts live in this repo's `scripts/` — invoke via bash from the repo root
-(or substitute your clone path for `$FH`).
+Scripts live in `~/projects/firecrawl-harness/scripts/`. Set `FH=~/projects/firecrawl-harness`
+(or substitute your clone path) and invoke `python3 $FH/scripts/<name>.py …` from any directory.
 
 ## Configuration (one-time)
 `SEARXNG_URL` is required — point it at your SearXNG's JSON endpoint via the
@@ -67,3 +67,10 @@ under heavy crawls has been observed in production.
   locally. **Search is always `scripts/fc_research.py` here.**
   Note: a session snapshots its tool list at start — sessions opened before the
   MCP row went live simply have no MCP tools; the scripts need none.
+
+In **omp** the server row lives user-level at `~/.omp/agent/mcp.json` (server `firecrawl`,
+stdio `npx -y firecrawl-mcp@3.24.0` against the loopback API, repo-local `npm_config_cache`
+because the host `~/.npm` cache holds root-owned files). omp registers that server's tools
+under its own server-qualified names — confirm exact names with `/mcp list` and `/mcp test
+firecrawl` inside an omp session. The same restriction applies there: only the four callables
+above (scrape / map / crawl / check-crawl-status); search is always `scripts/fc_research.py`.
