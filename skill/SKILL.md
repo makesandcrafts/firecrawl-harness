@@ -1,6 +1,6 @@
 ---
 name: firecrawl
-description: "Read, map, and crawl the web with a self-hosted Firecrawl stack (loopback http://127.0.0.1:3002) and turn SearXNG queries into research digests. Use when asked to scrape/read a URL, discover a site's structure, crawl a small site, or turn a search query into readable page content without cloud APIs. Triggers: scrape, crawl, read this URL, site structure, site map, web research, research query pipeline."
+description: "Read/map/crawl the web via the self-hosted Firecrawl stack (http://127.0.0.1:3002): scrape or read a URL, map site structure, crawl a small site, run a search-to-digest pipeline. Triggers: scrape, crawl, read URL, site map, web research."
 ---
 
 # Firecrawl local research stack
